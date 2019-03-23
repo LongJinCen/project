@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>打印结果</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/print.css" />
+		<link rel="stylesheet" href="css/print.css" />
+	</head>
+
+	<body>
+		<div class="container" id="main">
+		</div>
+	</body>
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var page_id=[5672,5671,5670];
+		var data_url = 'http://222.196.35.4:8088/GSMS/logistics/salesorder/getborder.do?IDS=';
+		var mock_url = 'https://www.easy-mock.com/mock/5a602e876c112f4d9e700c77/print/';
+		data_url+=(page_id.join(";")+";");
+		$.when($.ajax(data_url), $.ajax(mock_url)).done(function(JSON_parse, mock) {
+			var temp = new Print();
+			var content = temp.print(JSON_parse[0], mock[0]);
+			$("#main").append(content);
+		});
+	</script>
+
+</html>

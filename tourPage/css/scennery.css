@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+#container{
+	width: 1300px;
+	height: 1200px;
+	margin: 30px auto;
+}
+#container .list{
+	width:910px;
+	height: 1000px;
+	float: left;
+}
+#container .list img{
+	width: 280px;
+	height: 180px;
+	margin: 5px 5px 0px 5px;
+}
+#container .list h2{
+	font-size: 40px;
+	color: #666;
+}
+
+#container .list hr{
+	border: 1px dashed #666;
+	margin: 20px 0px;
+}
+
+#container .list figure{
+	display: inline-block;
+	border:1px solid #eee;
+}
+#container .list figcaption{
+	text-align: center;
+	margin: 5px 0px 15px 0px;
+	color: #666;
+	font-size: 22px;
+}
+
+#container .list .button{
+	height: 50px;
+	margin: 20px;
+}
+#container .list .button a{
+	margin: 0 auto;
+	text-decoration: none;
+	width: 200px;
+	line-height: 50px;
+	color: #070002;
+	font-size: 23px;
+	border:2px solid #b6b5b5;
+	border-radius: 10px;
+	display: block;
+	text-align: center;
+}

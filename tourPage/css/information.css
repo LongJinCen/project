@@ -1,0 +1,121 @@
+@charset "utf-8";
+
+#container{
+	width: 1300px;
+	height: 3000px;
+	margin: 30px auto;
+}
+#container .list{
+	width: 920px;
+	height: 1200px;
+	/*background-color: #ccc;*/
+	float: left;
+}
+
+#container .list .title{
+	width: 920px;
+	height: 50px;
+	background-color: #eee;
+}
+#container .list .title .left{
+	display: inline-block;
+	float: left;
+	font-size: 22px;
+}
+#container .list .title .left li{
+	height: 50px;
+	line-height: 50px;
+	width: 100px;
+	text-align: center;
+}
+#container .list .title .left :first-child{
+	background-color: #fff;
+	border-top-width: 3px;
+	border-top-style: solid;
+	border-top-color: #1fbc0f;
+	border-left-width:1px;
+	border-left-style:solid;
+	border-left-color:#a9aaa9;
+}
+#container .list .title .right{
+	float: right;
+	padding: 15px 10px 0px 0px;
+}
+#container .list .title .right li{
+	text-align: center;
+	margin-right: 20px;
+}
+#container .list .title .right li.select{
+	background-color: #1fbc0f;
+}
+#container .list .title li{
+	display: inline-block;
+}
+/*-----------------------------------------*/
+#container .tour{
+	width: 920px;
+	height: 300px;
+	position: relative;
+	border: 1px solid #1fbc0f;
+	margin: 20px auto;
+}
+
+#container .tour .button{
+	width: 170px;
+	height: 100px;
+	position: absolute;
+	top: 70px;
+	right: 0px;
+}
+#container .tour .button button{
+	width: 150px;
+	height: 50px;
+	background-color: #ff5d05;
+	border-style: none;
+	border-radius: 10px;
+
+}
+#container .tour .button .button1{
+	font-size: 20px;
+	color: #eee;
+}
+#container .tour .button strong{
+	font-size: 40px;
+	color: #ff5d05;
+}
+#container .tour .button s{
+	font-size: 15px;
+	color: #cdcac8;
+}
+#container .tour span{
+	font-weight: bold;
+	position: absolute;
+	bottom: 10px;
+	right: 25px;
+}
+#container .tour hgroup{
+	width: 180px;
+}
+#container .tour h2{
+	margin: 20px 0px 30px 20px;
+}
+#container .tour h3{
+	margin-left: 20px;
+	color: #333;
+	font-size: 16px;
+	line-height: 16px;
+}
+#container .tour img{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#container .tour .info{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width:420px;
+	height: 300px;
+}
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="97bce6f1-8387-40e3-a67b-11d363d73453" name="localhost" url="http://192.168.199.131:8080/financial/index.html">
+        <fileTransfer port="0" mountedRoot="D:\myproject\html5\financial" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
