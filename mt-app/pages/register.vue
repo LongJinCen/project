@@ -24,8 +24,8 @@
         <el-form-item label="验证码" prop="code">
           <el-input v-model="ruleForm.code" maxLength="4"/>
         </el-form-item>
-        <el-form-item label="验证码" prop="password">
-          <el-input v-model="ruleForm.pwd" type="pwd"/>
+        <el-form-item label="密码" prop="pwd">
+          <el-input v-model="ruleForm.pwd" type="password"/>
         </el-form-item>
         <el-form-item label="确认密码" prop="cpwd">
           <el-input v-model="ruleForm.cpwd" type="password"/>
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import CryptoJs from 'crypto-js'
 export default {
   layout: 'blank',
   data() {
@@ -81,7 +82,7 @@ export default {
           message: '确认密码',
           trigger: 'blur'
         }, {
-          validator: function (rule, value, callback) {
+          validator: (rule, value, callback) => {
             if (value === '') {
               callback(new Error('请再次输入密码'))
             } else if (value !== this.ruleForm.pwd) {
@@ -96,8 +97,63 @@ export default {
     }
   },
   methods: {
-    sendMsg: function() {},
-    register: function() {}
+    sendMsg: function() {
+      const self = this
+      let namePass = null,
+          emailPass = null;
+      if (self.timerid) {
+        return false
+      }
+      this.$refs['ruleForm'].validateField('name', (valid) => {
+        name = valid
+      })
+      this.$refs['ruleForm'].validateField('email', (valid) => {
+        emailPass = valid
+      })
+      if (!namePass && !emailPass) {
+        self.$axios.post('/users/verify', {
+          username: encodeURIComponent(self.ruleForm.name),
+          email: self.ruleForm.email
+        }).then(({ status, data }) => {
+          if (status === 200 && data && data.code === 0) {
+            let count = 60
+            self.statusMsg = `验证码已发送，剩余${count--}秒`
+            self.timerid = setInterval(function () {
+              self.statusMsg = `验证码已发送，剩余${count--}秒`
+              if (count === 0) {
+                clearInterval(self.timerid)
+              }
+            }, 1000)
+          }
+        })
+      }
+    },
+    register: function() {
+      let self = this
+      this.$refs['ruleForm'].validate((valid) => {
+        if(valid) {
+          self.$axios.post('/users/signup', {
+            username: encodeURIComponent(self.ruleForm.name),
+            password: CryptoJs.MD5(self.ruleForm.pwd).toString(),
+            email: self.ruleForm.email,
+            code: self.ruleForm.code
+          }).then(({ data, status }) => {
+            if (status === 200) {
+              if (data && data.code === 0) {
+                location.href = '/login'
+              } else {
+                self.error = data.msg 
+              }
+            } else {
+              self.error = `服务器出错, 错误码${status}`
+            }
+            setTimeout(function() {
+              self.error = ''
+            }, 1000)
+          })
+        }
+      })
+    }
   }
 }
 </script>
