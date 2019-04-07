@@ -25,8 +25,6 @@ const createStore = () => new Vuex.Store({
       if (hotPlace.status === 200) {
         commit('home/setHotPlace', hotPlace)
       }
-      // const data = await app.$axios.get('https://cd.meituan.com/ptapi/getHotCinema')
-      // console.log(data)
     }
   }
 })

@@ -26,7 +26,7 @@
             <dd v-for="(item, index) in hotList" :key="item._id"  v-if="index < 4">{{ item.name }}</dd>
           </dl>
           <dl v-if="isSearchList" class="searchList">
-            <dd v-for="item in searchList" :key="item">{{ item }}</dd>
+            <dd v-for="item in searchList" :key="item.editorWord">{{ item.editorWord }}</dd>
           </dl>
         </div>
         <p class="suggest">
@@ -74,12 +74,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       searchText: '',
       isFocus: false,
-      searchList: ['火锅', '火锅', '火锅', '火锅'],
       hotList: this.$store.state.home.hotPlace
     }
   },
@@ -90,6 +90,9 @@ export default {
     isSearchList: function() {
       return this.isFocus && this.searchText
     },
+    ...mapState({
+      searchList: state => state.home.searchList
+    })
   },
   methods: {
     focus: function() {
@@ -98,7 +101,18 @@ export default {
     blur: function() {
       this.isFocus = false
     },
-    input: function(event) {}
+    input: function(event) {
+      if (event === '') {
+        return
+      }
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.$store.dispatch({
+          type: 'home/setSearchList',
+          input: event
+        })
+      }, 300);
+    }
   },
 }
 </script>
