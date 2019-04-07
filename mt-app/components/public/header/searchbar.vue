@@ -23,18 +23,14 @@
           </button>
           <dl v-if="isHot" class="hotPlace">
             <dt>热门搜索</dt>
-            <dd v-for="item in hotList" :key="item">{{ item }}</dd>
+            <dd v-for="(item, index) in hotList" :key="item._id"  v-if="index < 4">{{ item.name }}</dd>
           </dl>
           <dl v-if="isSearchList" class="searchList">
             <dd v-for="item in searchList" :key="item">{{ item }}</dd>
           </dl>
         </div>
         <p class="suggest">
-          <a href="#">故宫博物馆</a>
-          <a href="#">故宫博物馆</a>
-          <a href="#">故宫博物馆</a>
-          <a href="#">故宫博物馆</a>
-          <a href="#">故宫博物馆</a>
+          <a href="#" v-for="(item, index) in hotList" v-if="index < 5" :key="item._id">{{ item.name }}</a>
         </p>
         <ul class="nav">
           <li>
@@ -83,8 +79,8 @@ export default {
     return {
       searchText: '',
       isFocus: false,
-      hotList: ['火锅', '火锅'],
-      searchList: ['火锅', '火锅', '火锅', '火锅']
+      searchList: ['火锅', '火锅', '火锅', '火锅'],
+      hotList: this.$store.state.home.hotPlace
     }
   },
   computed: {
@@ -93,7 +89,7 @@ export default {
     },
     isSearchList: function() {
       return this.isFocus && this.searchText
-    }
+    },
   },
   methods: {
     focus: function() {
@@ -103,6 +99,6 @@ export default {
       this.isFocus = false
     },
     input: function(event) {}
-  }
+  },
 }
 </script>

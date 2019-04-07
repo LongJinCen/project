@@ -7,6 +7,8 @@ import json from 'koa-json'
 import dbConfig from './dbs/config'
 import passport from './interface/utils/passport'
 import users from './interface/users'
+import geo from './interface/geo'
+import search from './interface/search'
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
@@ -50,6 +52,8 @@ async function start() {
     await nuxt.ready()
   }
   app.use(users.routes()).use(users.allowedMethods())
+  app.use(geo.routes()).use(geo.allowedMethods())
+  app.use(search.routes()).use(search.allowedMethods())
   app.use(ctx => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling
