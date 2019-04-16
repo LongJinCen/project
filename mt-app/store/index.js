@@ -2,12 +2,14 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import geo from './modules/geo'
 import home from './modules/home'
+import changecity from './modules/changeCity'
 
 Vue.use(Vuex)
 const createStore = () => new Vuex.Store({
   modules: {
     geo,
-    home
+    home,
+    changecity
   },
   actions: {
     async nuxtServerInit({ commit }, { req, app}) {
