@@ -12,6 +12,11 @@
       margin: 0 20px;
       color: #666;
       line-height: 22px;
+      cursor: pointer;
+      &:hover {
+        cursor: pointer;
+        color: #41B883;
+      }
     }
   }
 }

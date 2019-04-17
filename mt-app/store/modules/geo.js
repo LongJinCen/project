@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const state = () => ({
   position: {
     address: ''
@@ -11,8 +13,17 @@ const mutations = {
 }
 
 const actions = {
-  setPosition:({ commit }, position) => {
-    commit('setPosition', position)
+  setPosition: async ({ commit }, position) => {
+    if (position) {
+      commit('setPosition', position)
+    } else {
+      const { status, data } = await axios.get('/geo/getPosition')
+      if (status === 200) {
+        commit('setPosition', {
+          address: data.address.match(/省(.+)市/)[1]
+        })
+      }
+    }
   } 
 }
 

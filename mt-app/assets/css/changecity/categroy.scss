@@ -57,6 +57,11 @@
       color: #666;
       display: inline-block;
       font-size: 14px;
+
+      &:hover {
+        cursor: pointer;
+        color: #41B883;
+      }
     }
   }
 }

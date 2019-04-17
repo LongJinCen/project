@@ -39,7 +39,6 @@ router.get('/province', async (ctx) => {
 })
 
 router.get('/province/:id', async (ctx) => {
-  console.log(ctx)
   let city = await City.findOne({ id: ctx.params.id })
   ctx.body = {
     code: 0,
