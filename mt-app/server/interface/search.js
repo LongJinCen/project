@@ -42,7 +42,12 @@ router.get('/productsarea', async (ctx) => {
 })
 
 router.get('/sproducts', async (ctx) => {
-  
+  const { data, status } = await axios.get('https://cd.meituan.com/ptapi/recommends')
+  if (status === 200) {
+    ctx.body = {
+      data
+    }
+  }
 })
 
 export default router

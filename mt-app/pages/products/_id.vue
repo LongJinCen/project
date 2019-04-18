@@ -38,16 +38,20 @@ export default {
         }
     },
     async asyncData(ctx) {
-        const { status, data } = await ctx.$axios.get('/search/productsarea', {
+        const { status: status1, data: data1 } = await ctx.$axios.get('/search/productsarea', {
             params: {
                 id: 130300
             }
         })
+        const { status: status2, data: data2} = await ctx.$axios.get('/search/sproducts')
         const types = ctx.store.state.home.menu.filter(value => value.name.indexOf('/') === -1 )
-        return {
-            keyword: ctx.route.params.id,
-            areas: data.areas,
-            types
+        if (status1 === 200 && status2 === 200) {
+            return {
+                keyword: ctx.route.params.id,
+                areas: data1.areas,
+                types,
+                list: data2.data
+            }
         }
     }
 }

@@ -2,31 +2,29 @@
   <dl class="s-item">
     <dt>
       <img
-        :src="meta.img"
+        :src="'//p1.meituan.net/mogu/54c9f12684587c27248678855c167d8e540161.jpg@428w_240h_1e_1c'"
         alt="商品图片">
     </dt>
     <dd>
-      <h3><nuxt-link :to="{path:'detail',query:{keyword:meta.name,type:meta.module}}">{{ meta.name }}</nuxt-link></h3>
+      <h3><nuxt-link :to="{path:'detail',query:{keyword:meta.title,type:meta.module}}">{{ meta.title }}</nuxt-link></h3>
       <el-rate
-        v-model="meta.rate"
+        v-model="meta.score"
         :colors="['#ff9900', '#ff9900', '#FF9900']"
         disabled/>
       <span
-        v-if="meta.rate>4"
+        v-if="meta.score>4"
         class="s-item-comment">很好</span><span
-          v-else-if="meta.rate>3"
+          v-else-if="meta.socre>3"
           class="s-item-comment">一般</span><span
             v-else
             class="s-item-comment">很差</span>
-      <span class="s-item-value">{{ meta.rate }}分</span>
-      <span class="s-item-comment-total">{{ meta.comment }}人评论</span>
+      <span class="s-item-value">{{ meta.score }}分</span>
+      <span class="s-item-comment-total">{{ meta.commentNum }}人评论</span>
       <p>
-        <span class="s-item-type">{{ meta.type }}</span>
-        <span class="s-item-addr">{{ meta.addr }}</span>
+        <span class="s-item-addr">{{ meta.areaName }}</span>
       </p>
       <p>
-        <em class="s-item-price">￥{{ meta.price }}起</em>
-        <b>{{ meta.status }}</b>
+        <em class="s-item-price">￥{{ meta.lowPrice }}起</em>
       </p>
       <ul>
         <!-- <li>
