@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import Poi from '../dbs/models/poi'
+import Area from '../dbs/models/areas'
 import axios from 'axios'
 
 const router = new Router({
@@ -32,5 +33,16 @@ router.get('/hotplace', async (ctx) => {
   }
 })
 
+router.get('/productsarea', async (ctx) => {
+  const id = ctx.query.id
+  const data = await Area.findOne({ id })
+  ctx.body = {
+    areas: data.value
+  }
+})
+
+router.get('/sproducts', async (ctx) => {
+  
+})
 
 export default router

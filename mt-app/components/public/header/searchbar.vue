@@ -25,8 +25,10 @@
             <dt>热门搜索</dt>
             <dd v-for="(item, index) in hotList" :key="item._id"  v-if="index < 4">{{ item.name }}</dd>
           </dl>
-          <dl v-if="isSearchList" class="searchList">
-            <dd v-for="item in searchList" :key="item.editorWord">{{ item.editorWord }}</dd>
+          <dl v-if="isSearchList" class="searchList" @click="handleclick">
+            <dd v-for="item in searchList" :key="item.editorWord">
+              <nuxt-link :to="`/products/${item.editorWord}`">{{ item.editorWord }}</nuxt-link>
+            </dd>
           </dl>
         </div>
         <p class="suggest">
@@ -99,7 +101,9 @@ export default {
       this.isFocus = true
     },
     blur: function() {
-      this.isFocus = false
+      setTimeout(() => {
+        this.isFocus = false
+      }, 300);
     },
     input: function(event) {
       if (event === '') {
@@ -112,6 +116,9 @@ export default {
           input: event
         })
       }, 300);
+    },
+    handleclick: function (e) {
+      this.searchText = e.target.innerText
     }
   },
 }

@@ -4,7 +4,7 @@
             <dt>{{ name }}<i class="el-icon-arrow-down el-icon-right"/></dt>
             <dd>
                 <h3>{{ name }}</h3>
-                <span v-for="(item, index) in list" :key="index">{{ item }}</span>
+                <span v-for="(item, index) in list" :key="index">{{ item.title }}</span>
             </dd>
         </dl>
     </div>
@@ -16,13 +16,13 @@ export default {
         name: {
             type: String,
             default: ''
+        },
+        list: {
+            type: Array,
+            default () {
+                return []
+            }
         }
     },
-    list: {
-        type: Array,
-        default () {
-            return []
-        }
-    }
 }
 </script>

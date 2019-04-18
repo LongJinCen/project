@@ -28,8 +28,27 @@ export default {
         List,
         Amap
     },
+    data() {
+        return {
+            list: [],
+            types: [],
+            areas: [],
+            keyword: '',
+            point: []
+        }
+    },
     async asyncData(ctx) {
-        
+        const { status, data } = await ctx.$axios.get('/search/productsarea', {
+            params: {
+                id: 130300
+            }
+        })
+        const types = ctx.store.state.home.menu.filter(value => value.name.indexOf('/') === -1 )
+        return {
+            keyword: ctx.route.params.id,
+            areas: data.areas,
+            types
+        }
     }
 }
 </script>
