@@ -27,6 +27,13 @@ export default {
         Categroy,
         List,
         Amap
+    },
+    async asyncData(ctx) {
+        
     }
 }
 </script>
+
+<style lang="scss">
+@import "@/assets/css/products/index.scss";
+</style>
