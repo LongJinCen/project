@@ -9,7 +9,9 @@ export default {
     let { status, data } = await ctx.$axios.get('users/exit')
     if (status === 200) {
       if (data && data.code === 0) {
-        location.href = '/'
+        this.$router.push({
+          path: '/'
+        })
       }
     }
   }

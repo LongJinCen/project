@@ -140,7 +140,9 @@ export default {
           }).then(({ data, status }) => {
             if (status === 200) {
               if (data && data.code === 0) {
-                location.href = '/login'
+                this.$router.push({
+                  path: '/login'
+                })
               } else {
                 self.error = data.msg 
               }
