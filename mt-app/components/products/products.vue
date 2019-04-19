@@ -6,7 +6,7 @@
         alt="商品图片">
     </dt>
     <dd>
-      <h3><nuxt-link :to="{path:'detail',query:{keyword:meta.title,type:meta.module}}">{{ meta.title }}</nuxt-link></h3>
+      <h3><nuxt-link :to="{path:'/detail'}">{{ meta.title }}</nuxt-link></h3>
       <el-rate
         v-model="meta.score"
         :colors="['#ff9900', '#ff9900', '#FF9900']"

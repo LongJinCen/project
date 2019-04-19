@@ -10,6 +10,7 @@ import users from './interface/users'
 import geo from './interface/geo'
 import search from './interface/search'
 import changecity from './interface/changeCity'
+import cart from './interface/cart'
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
@@ -56,6 +57,7 @@ async function start() {
   app.use(geo.routes()).use(geo.allowedMethods())
   app.use(search.routes()).use(search.allowedMethods())
   app.use(changecity.routes()).use(changecity.allowedMethods())
+  app.use(cart.routes()).use(cart.allowedMethods())
   app.use(ctx => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling
