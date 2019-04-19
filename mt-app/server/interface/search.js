@@ -50,4 +50,10 @@ router.get('/sproducts', async (ctx) => {
   }
 })
 
+router.get('/islogin', async (ctx) => {
+  ctx.body = {
+    islogin: ctx.isAuthenticated()
+  }
+})
+
 export default router

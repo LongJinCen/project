@@ -56,10 +56,30 @@ export default {
     },
     data() {
         return {
-            keyword: '',
+            keyword: '火锅',
             product: {},
-            type: '',
-            list: [],
+            type: '美食',
+            list: [{
+                photos: [{
+                    url: 'http://p0.meituan.net/208.126/deal/4718f907ba21aa1f9677eb15fcf5281166921.jpg@100w_100h_1e_1c',
+                    title: 'xxx'
+                }],
+                name: '精致双人菜品套餐1份',
+                solidNum: '1435',
+                deadline: '2019-7-21',
+                cost1: '88',
+                cost2: '158'
+            }, {
+                photos: [{
+                    url: 'http://p0.meituan.net/208.126/deal/4718f907ba21aa1f9677eb15fcf5281166921.jpg@100w_100h_1e_1c',
+                    title: 'xxx'
+                }],
+                name: '2店通用6-8人午餐，包间免费',
+                solidNum: '1435',
+                deadline: '2019-7-21',
+                cost1: '316',
+                cost2: '218'
+            }],
             login: false
         }
     },
@@ -67,6 +87,11 @@ export default {
         canOrder: function () {
             return this.list.filter(item => item.photos.length).length
         }
+    },
+    mounted() {
+        this.$axios.get('/search/islogin').then(res => {
+            this.login = res.data.islogin
+        })
     },
 }
 </script>

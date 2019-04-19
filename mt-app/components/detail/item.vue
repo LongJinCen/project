@@ -11,12 +11,12 @@
       <dd>
         <h4>{{ meta.name }}</h4>
         <p>
-          <span v-if="meta.biz_ext&&meta.biz_ext.ticket_ordering">剩余：{{ Number(meta.biz_ext.ticket_ordering) }}</span>
-          <span v-if="meta.deadline">截止日期：{{ meta.deadline }}</span>
+          <span>已售：{{ meta.solidNum }}</span>
+          <span>截止日期：{{ meta.deadline }}</span>
         </p>
         <p>
-          <span class="price">{{ Number(meta.biz_ext.cost) }}</span>
-          <sub>门店价{{ Number(meta.biz_ext.cost) }}</sub>
+          <span class="price">{{ Number(meta.cost1) }}</span>
+          <sub>门店价{{ Number(meta.cost2) }}</sub>
         </p>
       </dd>
       <dd>

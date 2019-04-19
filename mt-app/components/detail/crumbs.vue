@@ -1,9 +1,9 @@
 <template>
   <div class="m-crumbs">
     <el-breadcrumb separator=">">
-      <el-breadcrumb-item :to="{ path: '/' }">{{ $store.state.geo.home.position.address.replace('市','') }}美团</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/' }">{{ $store.state.geo.home.position.address.replace('市','') }}{{ type }}</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">{{ $store.state.geo.home.position.address.replace('市','') }}{{ decodeURIComponent(keyword) }}</a></el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }">{{ this.$store.state.geo.position.address }}美团</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }">{{ this.$store.state.geo.position.address }}{{ type }}</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/">{{ this.$store.state.geo.position.address }}{{ decodeURIComponent(keyword) }}</a></el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -13,11 +13,11 @@ export default {
   props: {
     keyword: {
       type:String,
-      default:''
+      default:'火锅'
     },
     type: {
       type:String,
-      default:''
+      default:'美食'
     }
   }
 }
