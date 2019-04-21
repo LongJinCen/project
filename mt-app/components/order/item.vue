@@ -5,8 +5,8 @@
             <p>{{ item.name}}</p>
             <p>数量: {{ item.count }}</p>
         </div>
-        <p>总价: ${{ item.total }}</p>
-        <p>{{ statusText[item.status]}}</p>
+        <p class="price">总价: ${{ item.total }}</p>
+        <p class="status">{{ statusText[item.status]}}</p>
     </div>
 </template>
 
