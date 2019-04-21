@@ -27,7 +27,7 @@ export default {
             if(this.curTab == '0') {
                 return this.list
             }
-            return this.list.filter(value =>value.status === +this.curtap)
+            return this.list.filter(value =>value.status === +this.curTab)
         }
     },
     methods: {
@@ -43,7 +43,8 @@ export default {
         list: {
             type: Array,
             default: () => []
-        }
+        },
+        changeTab: Function
     }
 }
 </script>

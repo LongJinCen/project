@@ -5,12 +5,14 @@
                 <Menu
                     :changeTab="changeTab"
                     :curTab="curTab"
+                    :menuData="menuData"
                 />
             </el-col>
             <el-col :span="18">
                 <Order
                     :curTab="curTab"
                     :list="orderList"
+                    :changeTab="changeTab"
                 />
             </el-col>
         </el-row>
@@ -24,7 +26,8 @@ export default {
     data() {
         return {
             curTab: '0',
-            orderList: []
+            orderList: [],
+            menuData: {}
         }
     },
     components: {
@@ -40,6 +43,11 @@ export default {
         this.$axios.get('/order/list').then(({ status, data }) => {
             if(status === 200) {
                 this.orderList  = data.list
+                this.menuData = {
+                    allOrder: data.list.length,
+                    pendingPayment: data.list.filter(value => value.status == '1').length,
+                    pendingUse: data.list.filter(value => value.status == '2'),
+                }
             }
         })
     },

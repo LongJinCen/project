@@ -20,7 +20,7 @@ router.post('/create', async ctx => {
         id,
         time,
         imgUrl: cart.detail[0].imgs[0].url,
-        status: 0,
+        status: 1,
         name: cart.detail[0].name
     })
     const result = await newOrder.save()
