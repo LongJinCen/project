@@ -2,12 +2,12 @@
   <div class="search-panel">
     <el-row class="m-header-searchbar">
       <el-col :span="3" class="left">
-        <a href="//cd.meituan.com">
+        <nuxt-link to="/">
           <img
             src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
             alt="美团"
           />
-        </a>
+        </nuxt-link>
       </el-col>
       <el-col :span="12" class="center">
         <div class="wrapper">
