@@ -17,11 +17,14 @@
 </template>
 
 <script>
-import Item from './order.vue'
+import Item from './item.vue'
 export default {
+    components: {
+        Item
+    },
     computed: {
         curlist: function () {
-            if(this.curtap == '0') {
+            if(this.curTab == '0') {
                 return this.list
             }
             return this.list.filter(value =>value.status === +this.curtap)

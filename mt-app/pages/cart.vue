@@ -13,7 +13,7 @@
                 <div class="post">
                     <el-button
                         type="primary"
-                        @submit="handleSubmit"
+                        @click="handleSubmit"
                     >
                         提交订单
                     </el-button>
@@ -39,7 +39,6 @@ export default {
     },
     computed: {
         total: function () {
-            console.log(this.cart)
             let total = 0
             this.cart.forEach(item => {
                 total += item.price * item.count
@@ -49,7 +48,15 @@ export default {
     },
     methods: {
         handleSubmit: async function () {
-            
+            const order = {
+                total: this.total,
+                cartNo: this.cartNo,
+                count: this.cart[0].count,
+            }
+            const result  = await this.$axios.post('/order/create', order)
+            if(result.status === 200) {
+                this.$router.push('/order')
+            }
         }
     },
     async asyncData (ctx) {

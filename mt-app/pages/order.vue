@@ -10,6 +10,7 @@
             <el-col :span="18">
                 <Order
                     :curTab="curTab"
+                    :list="orderList"
                 />
             </el-col>
         </el-row>
@@ -22,7 +23,8 @@ import Order from '@/components/order/order.vue'
 export default {
     data() {
         return {
-            curTab: '0'
+            curTab: '0',
+            orderList: []
         }
     },
     components: {
@@ -35,7 +37,11 @@ export default {
         }
     },
     mounted() {
-        
+        this.$axios.get('/order/list').then(({ status, data }) => {
+            if(status === 200) {
+                this.orderList  = data.list
+            }
+        })
     },
 }
 </script>

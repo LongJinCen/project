@@ -1,8 +1,8 @@
 <template>
     <div class="list-item">
-        <img :src="item.photo[0].url" :alt="item.title">
+        <img :src="item.imgUrl" :alt="item.name">
         <div>
-            <p>{{ item.title}}</p>
+            <p>{{ item.name}}</p>
             <p>数量: {{ item.count }}</p>
         </div>
         <p>总价: ${{ item.total }}</p>
