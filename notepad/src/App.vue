@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    fasfasdf
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* 样式重置 */
+#app *{
+  -webkit-user-select: none; /* 禁止用户选中文字，安卓无效 */
+  -webkit-touch-callout: none; /*禁止长按弹出系统菜单*/
+  -webkit-text-size-adjust: 100%; /* 样式重置 */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /*去除android下a/button/input标签被点击时产生的边框 & 去除ios下a标签被点击时产生的半透明灰色背景*/
+  -webkit-appearance: none; /* 按钮在ios下都是圆角*/
+  border-radius: 0; /*input有个默认圆角 */
 }
 </style>
