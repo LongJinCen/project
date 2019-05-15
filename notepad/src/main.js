@@ -13,14 +13,14 @@ const router = new VueRouter({
   routes
 })
 
-const store = new Vuex.Store({
+new Vuex.Store({
   modules: {
       Home
   }
 })
 
 const app = new Vue({
-  router
+  router,
 }).$mount('#app')
 
 // After you create app

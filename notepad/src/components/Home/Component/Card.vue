@@ -1,12 +1,13 @@
 <template>
   <div>
-    edit
+    card
   </div>
 </template>
 
 <script>
-export default {
 
+export default {
+    name: 'card'
 }
 </script>
 

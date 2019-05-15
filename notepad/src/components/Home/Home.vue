@@ -1,15 +1,21 @@
 <template>
-  <div>
+  <div id="home">
     home
   </div>
 </template>
 
 <script>
-export default {
 
+export default {
+  components: {
+
+  }
 }
 </script>
 
 <style scope>
-
+#home {
+  width: 7.5rem;
+  box-sizing: border-box;
+}
 </style>
