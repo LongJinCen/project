@@ -109,6 +109,7 @@ export const App = {
     mutations: {
         createItem(state, payload) {
             state.list.unshift(payload.newItem)
+            localStorage.setItem('noteLists', JSON.stringify(state.list))
         },
         deleteItem(state) {
 
@@ -126,23 +127,16 @@ export const App = {
                     break;
                 }
             }
+            localStorage.setItem('noteLists', JSON.stringify(list))
             state.list = list
         },
         updateStatus(state, payload) {
             for (const prop in payload) {
                 state[prop] = payload[prop]
             }
-        }
-    },
-    actions: {
-        createItem({ state, commit }) {
-
         },
-        deleteItem({ state, commit }) {
-
-        },
-        updateItem({ state, commit }) {
-
+        readFromLocalStorage(state, payload) {
+            state.list = payload.list
         },
     },
     getters: {

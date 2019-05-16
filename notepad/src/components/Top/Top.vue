@@ -1,7 +1,12 @@
 <template>
   <div class="header">
     <div class="top-left float-left">
-      <span class="iconfont">&#xeb61;</span>
+      <v-touch
+          class="iconfont v-touch-inline"
+          @tap="handleTap('back')"
+          v-if="status.atEdit"
+        >&#xe609;</v-touch>
+      <span class="iconfont" v-else>&#xeb61;</span>
     </div>
     <div class="top-right float-right">
       <template v-if="!status.atEdit">
@@ -69,6 +74,9 @@ export default {
           case 'manage':
 
             break;
+          case 'back':
+            this.$router.push('/app/home')
+            break;
           default:
             break;
         }
@@ -119,6 +127,10 @@ export default {
 
 .top-left span {
   font-size: 0.6rem;
+}
+
+.top-left .v-touch-inline {
+  font-size: .6rem;
 }
 
 .top-right .v-touch-inline {

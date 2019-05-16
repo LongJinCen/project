@@ -9,9 +9,23 @@
 import Top from './components/Top/Top.vue'
 export default {
   name: 'app',
+  data() {
+    return {
+      dataBase: null
+    }
+  },
   components: {
     Top
-  }
+  },
+  mounted() {
+    let list = localStorage.getItem('noteLists')
+    console.log(JSON.parse(list), 'first enter')
+    if(list) {
+      this.$store.commit('App/readFromLocalStorage', {
+        list: JSON.parse(list),
+      })
+    }
+  },
 }
 </script>
 
