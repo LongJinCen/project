@@ -13,7 +13,7 @@ export default {
     let result = ''
     if(id !== "null") {
       result = this.$store.getters['App/getById'](id).content;
-      this.$store.commit('App/updateStatus', { isUpdate: true, atEdit: true, textAreaRef, id })
+      this.$store.commit('App/updateStatus', { isUpdate: true, atEdit: true, textAreaRef, curentId: id })
     } else {
       this.$store.commit('App/updateStatus', { isCreate: true, atEdit: true, textAreaRef })
       this.$refs.textarea.focus()

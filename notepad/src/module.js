@@ -141,7 +141,7 @@ export const App = {
     },
     getters: {
         getById :(state) => (id) => {
-            return state.list.find(item => item.id = id)
+            return state.list.find(item => item.id == id)
         }
     }
 }

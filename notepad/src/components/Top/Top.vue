@@ -56,7 +56,7 @@ export default {
         return this.$store.state.App.textAreaRef
       },
       editId () {
-        return this.$store.state.App.id
+        return this.$store.state.App.curentId;
       }
     },
     methods: {
@@ -101,6 +101,7 @@ export default {
           this.$store.commit('App/createItem', { newItem })
         }
         if (this.status.isUpdate) {
+          console.log(this.editId, 'id')
           const updateItem = {
             id: this.editId,
             content: text,
