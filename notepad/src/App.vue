@@ -62,6 +62,10 @@ a {
   white-space: nowrap;
 }
 
+.v-touch-inline {
+  display: inline;
+}
+
 
 @media screen and (min-width: 750px) {
   html {

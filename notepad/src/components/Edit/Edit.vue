@@ -8,16 +8,17 @@
 export default {
   name: 'edit',
   mounted() {
-    const id = this.$route.params.id;
+    const id = this.$route.params.id,
+          textAreaRef = this.$refs.textarea;
     let result = ''
     if(id !== "null") {
       result = this.$store.getters['App/getById'](id).content;
-      this.$store.commit('App/updateStatus', { isUpdate: true, atEdit: true })
+      this.$store.commit('App/updateStatus', { isUpdate: true, atEdit: true, textAreaRef, id })
     } else {
-      this.$store.commit('App/updateStatus', { isCreate: true, atEdit: true })
+      this.$store.commit('App/updateStatus', { isCreate: true, atEdit: true, textAreaRef })
       this.$refs.textarea.focus()
     }
-    this.$refs.textarea.innerText = result
+    this.$refs.textarea.value = result
   },
   methods: {
     handlefocus () {
@@ -30,6 +31,8 @@ export default {
         isFocus: false,
         atEdit: false,
         isUpdate: false,
+        textAreaRef: null,
+        curentId: 0,
       })
   }
 }

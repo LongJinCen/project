@@ -6,6 +6,8 @@ export const App = {
         isFocus: false,
         atEdit: false,
         isUpdate: false,
+        textAreaRef: null,
+        curentId: 0,
         list: [{
             id: 1,
             title: '隆金岑',
@@ -105,14 +107,26 @@ export const App = {
         }]
     },
     mutations: {
-        createItem(state) {
-
+        createItem(state, payload) {
+            state.list.unshift(payload.newItem)
         },
         deleteItem(state) {
 
         },
-        updateItem(state) {
-
+        updateItem(state, payload) {
+            const id = payload.updateItem.id,
+                  list = state.list,
+                  len = list.length;
+            for (let index = 0; index < len; index++) {
+                if(list[index].id === id) {
+                    list[index] = {
+                        ...list[index],
+                        ...payload.updateItem
+                    }
+                    break;
+                }
+            }
+            state.list = list
         },
         updateStatus(state, payload) {
             for (const prop in payload) {

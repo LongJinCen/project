@@ -5,11 +5,25 @@
     </div>
     <div class="top-right float-right">
       <template v-if="!status.atEdit">
-        <span class="iconfont">&#xe8ef;</span>
-        <span class="iconfont">&#xe627;</span>
+        <v-touch
+          class="iconfont v-touch-inline"
+          @tap="handleTap('search')"
+        >&#xe8ef;</v-touch>
+        <v-touch
+          class="iconfont v-touch-inline"
+          @tap="handleTap('manage')"
+        >&#xe627;</v-touch>
       </template>
-      <span class="statusText" v-if="status.isFocus">完成</span>
-      <span class="statusText" v-else-if="status.isManage">取消</span>
+      <v-touch
+        class="statusText"
+        v-if="status.isFocus"
+        @tap="handleTap('complete')"
+      >完成</v-touch>
+      <v-touch
+        class="statusText"
+        v-else-if="status.isManage"
+        @tap="handleTap('cancle')"
+      >取消</v-touch>
     </div>
     <div class="top-center ">
       <span>全部</span>
@@ -19,6 +33,7 @@
 </template>
 
 <script>
+import { getDate } from '../../util.js'
 export default {
     name: 'top',
     computed: {
@@ -31,6 +46,62 @@ export default {
           isUpdate: appState.isUpdate,
           isManage: appState.isManage
         }
+      },
+      textAreaRef () {
+        return this.$store.state.App.textAreaRef
+      },
+      editId () {
+        return this.$store.state.App.id
+      }
+    },
+    methods: {
+      handleTap(type, event) {
+        switch (type) {
+          case 'complete':
+              this.handleComplete()
+            break;
+          case 'cancle':
+
+            break;
+          case 'search':
+            
+            break;
+          case 'manage':
+
+            break;
+          default:
+            break;
+        }
+      },
+      handleComplete () {
+        const text = this.textAreaRef.value
+        const isEmpty = text.match(/^\s*$/)
+        if(isEmpty) {
+          console.log('内容不能为空')
+          return
+        }
+        const title = text.match(/^([\w\W]{0,7})/)[0],
+              date = getDate()
+        if(this.status.isCreate) {
+          const newItem = {
+            id: Date.now().toString(),
+            date,
+            content: text,
+            title,
+            type: '备忘录'
+          }
+          this.$store.commit('App/createItem', { newItem })
+        }
+        if (this.status.isUpdate) {
+          const updateItem = {
+            id: this.editId,
+            content: text,
+            title,
+            date
+          }
+          this.$store.commit('App/updateItem', { updateItem })
+        }
+        this.$router.push('/app/home')
       }
     },
 }
@@ -50,7 +121,7 @@ export default {
   font-size: 0.6rem;
 }
 
-.top-right span {
+.top-right .v-touch-inline {
   font-size: 0.6rem;
   line-height: .6rem;
 }
@@ -76,5 +147,6 @@ export default {
 
 .header .statusText {
   font-size: 15px;
+  display: inline-block;
 }
 </style>
