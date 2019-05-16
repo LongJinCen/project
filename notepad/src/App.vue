@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style>
+@import './style.css';
 /* 样式重置 */
 *{
   -webkit-user-select: none; /* 禁止用户选中文字，安卓无效 */
@@ -32,11 +33,27 @@ body {
   font-size: 12px;
 }
 
+/* 工具css */
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float:right;
+}
+
 .clear-float::after {
   content: '';
   display: block;
   clear: both;
 }
+
+.one-line-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 @media screen and (min-width: 750px) {
   html {
