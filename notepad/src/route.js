@@ -10,7 +10,7 @@ export const routes = [
             path:'home',
             component: Home
         },{
-            path: 'edit',
+            path: 'edit/:id',
             component: Edit
         }]
     },

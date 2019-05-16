@@ -29,10 +29,18 @@ export default {
   padding: 0;
 }
 
+input:focus, textarea:focus {
+  outline: none;
+}
+
 body {
   font-size: 12px;
 }
 
+a {
+  text-decoration: none;
+  color: rgb(30, 30, 30);
+}
 /* 工具css */
 .float-left {
   float: left;

@@ -1,5 +1,5 @@
 <template>
-  <div id="card">
+  <v-touch id="card"  @tap="handleRoute">
     <div class="wrap">
       <div class="choose">
         <span class="choosed">
@@ -22,13 +22,20 @@
         </div>
       </div>
     </div>
-  </div>
+  </v-touch>
 </template>
 
 <script>
 export default {
-    name: 'card',
-    props: ['item']
+  name: 'card',
+  props: ['item'],
+  methods: {
+    handleRoute() {
+      this.$router.push({
+        path: `/app/edit/${this.item.id}`
+      })
+    }
+  },
 }
 </script>
 
