@@ -5,9 +5,11 @@
         <Card v-for="(item, index) in items" v-bind:key="index" v-bind:item="item"/>
       </ul>
     </div>
-    <div class="edit">
-      <span class="iconfont">&#xe600;</span>
-    </div>
+    <router-link to="/app/edit/null">
+      <v-touch class="edit">
+        <span class="iconfont">&#xe600;</span>
+      </v-touch>
+    </router-link>
     <div class="footer">
 
     </div>
@@ -28,74 +30,19 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {})
     })
   },
+  updated: function () {
+    this.$nextTick(() => {
+      this.scroll.refresh()
+    })
+  },
   data() {
     return {
       scroll: null,
-      items: [{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      },{
-        title: '隆金岑',
-        type: '备忘录',
-        date: '2019/05/15'
-      }]
+    }
+  },
+  computed: {
+    items () {
+      return this.$store.state.App.list
     }
   },
 }

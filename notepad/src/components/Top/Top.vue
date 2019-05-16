@@ -4,8 +4,12 @@
       <span class="iconfont">&#xeb61;</span>
     </div>
     <div class="top-right float-right">
-      <span class="iconfont">&#xe8ef;</span>
-      <span class="iconfont">&#xe627;</span>
+      <template v-if="!status.atEdit">
+        <span class="iconfont">&#xe8ef;</span>
+        <span class="iconfont">&#xe627;</span>
+      </template>
+      <span class="statusText" v-if="status.isFocus">完成</span>
+      <span class="statusText" v-else-if="status.isManage">取消</span>
     </div>
     <div class="top-center ">
       <span>全部</span>
@@ -16,7 +20,19 @@
 
 <script>
 export default {
-    name: 'Top'
+    name: 'top',
+    computed: {
+      status () {
+        const appState = this.$store.state.App
+        return {
+          isCreate: appState.isCreate,
+          isFocus: appState.isFocus,
+          atEdit: appState.atEdit,
+          isUpdate: appState.isUpdate,
+          isManage: appState.isManage
+        }
+      }
+    },
 }
 </script>
 
@@ -36,6 +52,7 @@ export default {
 
 .top-right span {
   font-size: 0.6rem;
+  line-height: .6rem;
 }
 
 .top-center {
@@ -57,4 +74,7 @@ export default {
   margin-left: 5px;
 }
 
+.header .statusText {
+  font-size: 15px;
+}
 </style>
