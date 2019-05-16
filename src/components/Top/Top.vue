@@ -161,5 +161,6 @@ export default {
 .header .statusText {
   font-size: 15px;
   display: inline-block;
+  line-height: .6rem;
 }
 </style>
