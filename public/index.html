@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="format-detection" content="telephone=no,email=no" />
+			<meta name="apple-mobile-web-app-title" content="记事本">
+      <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>notepad</title>
+    <script>
+      // 采用rem适配
+			(function(doc, win, designWidth) {
+				const html = doc.documentElement;
+				const refreshRem = () => {
+					const clientWidth = html.clientWidth;
+					if (clientWidth >= designWidth) {
+						html.style.fontSize = '100px';
+					} else {
+						html.style.fontSize = 100 * (clientWidth / designWidth) + 'px';
+					}
+				};
+				doc.addEventListener('DOMContentLoaded', refreshRem);
+			})(document, window, 750);//以iphone6为准
+		</script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but notepad doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

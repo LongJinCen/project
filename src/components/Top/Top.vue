@@ -1,0 +1,170 @@
+<template>
+  <div id="header">
+    <div class="header-top-left float-left">
+      <v-touch
+          class="iconfont v-touch-inline"
+          @tap="handleTap('back')"
+          v-if="status.atEdit"
+        >&#xe609;</v-touch>
+      <span class="iconfont" v-else>&#xeb61;</span>
+    </div>
+    <div class="header-top-right float-right">
+      <template v-if="!status.atEdit&&!status.isManage">
+        <v-touch
+          class="iconfont v-touch-inline"
+          @tap="handleTap('search')"
+        >&#xe8ef;</v-touch>
+        <v-touch
+          class="iconfont v-touch-inline"
+          @tap="handleTap('manage')"
+        >&#xe627;</v-touch>
+      </template>
+      <v-touch
+        class="header-statusText"
+        v-if="status.isFocus"
+        @tap="handleTap('complete')"
+      >完成</v-touch>
+      <v-touch
+        class="header-statusText"
+        v-else-if="status.isManage"
+        @tap="handleTap('cancle')"
+      >取消</v-touch>
+    </div>
+    <div class="header-top-center ">
+      <span>全部</span>
+      <span class="iconfont">&#xe8ec;</span>
+    </div>
+  </div>
+</template>
+
+<script>
+import { getDate } from '../../util.js'
+export default {
+    name: 'top',
+    computed: {
+      status () {
+        const appState = this.$store.state.App
+        return {
+          isCreate: appState.isCreate,
+          isFocus: appState.isFocus,
+          atEdit: appState.atEdit,
+          isUpdate: appState.isUpdate,
+          isManage: appState.isManage
+        }
+      },
+      textAreaRef () {
+        return this.$store.state.App.textAreaRef
+      },
+      listRef() {
+        return this.$store.state.App.listRef
+      },
+      editId () {
+        return this.$store.state.App.curentId;
+      }
+    },
+    methods: {
+      handleTap(type, event) {
+        switch (type) {
+          case 'complete':
+              this.handleComplete()
+            break;
+          case 'cancle':
+            this.$store.commit('App/updateStatus', { isManage: false , isAllChoose: false})
+            this.listRef.style.height = 'calc(100vh - 1rem)'
+            break;
+          case 'search':
+            
+            break;
+          case 'manage':
+            this.$store.commit('App/updateStatus', { isManage: true }) //  全选
+            break;
+          case 'back':
+            this.$router.push('/app/home')
+            break;
+          default:
+            break;
+        }
+      },
+      handleComplete () {
+        const text = this.textAreaRef.value
+        const isEmpty = text.match(/^\s*$/)
+        if(isEmpty) {
+          console.log('内容不能为空')
+          return
+        }
+        const title = text.match(/^([\w\W]{0,7})/)[0],
+              date = getDate()
+        if(this.status.isCreate) {
+          const newItem = {
+            id: Date.now().toString(),
+            date,
+            content: text,
+            title,
+            type: '备忘录'
+          }
+          this.$store.commit('App/createItem', { newItem })
+        }
+        if (this.status.isUpdate) {
+          console.log(this.editId, 'id')
+          const updateItem = {
+            id: this.editId,
+            content: text,
+            title,
+            date
+          }
+          this.$store.commit('App/updateItem', { updateItem })
+        }
+        this.$router.push('/app/home')
+      }
+    },
+}
+</script>
+
+<style scope>
+#header {
+  width: 7.5rem;
+  height: 1rem;
+  background-color: rgb(240, 238, 229);
+  padding: .2rem;
+  box-sizing: border-box;
+  border-bottom: 0.02rem solid rgb(227, 223, 215)
+}
+
+.header-top-left span {
+  font-size: 0.6rem;
+}
+
+.header-top-left .v-touch-inline {
+  font-size: .6rem;
+}
+
+.header-top-right .v-touch-inline {
+  font-size: 0.6rem;
+  line-height: .6rem;
+}
+
+.header-top-center {
+  margin-left: .6rem;
+  margin-right: 1.2rem;
+  text-align: center;
+  height: .6rem;
+  line-height: .6rem;
+  font-size: .4rem;
+}
+
+.header-top-center span:nth-child(1) {
+  margin-left: .2rem;
+  vertical-align: middle;
+}
+
+.header-top-center span:nth-child(2) {
+  font-size: .24rem;
+  margin-left: 5px;
+}
+
+#header .header-statusText {
+  font-size: 15px;
+  display: inline-block;
+  line-height: .6rem;
+}
+</style>
