@@ -1,6 +1,10 @@
 <template>
-  <div id="card">
-    <div class="wrap" v-bind:class="{active_left: status.isManage}">
+  <v-touch id="card">
+    <v-touch class="wrap"
+      v-bind:class="{active_left: status.isManage, active_right: isSwiped, active_middle: isMiddle}"
+      @swipeleft="handleSwipe('left')"
+      @swiperight="handleSwipe('right')"
+    >
       <div class="choose">
         <v-touch class="choosed" @tap="handleTap('choose')">
         </v-touch>
@@ -14,23 +18,31 @@
         </p>
       </v-touch>
       <div class="operate">
-        <div class="move">
+        <v-touch class="move" @tap="handleTap('operate-move')">
           <span class="iconfont">&#xe7d1;</span>
-        </div>
-        <div class="delete">
+        </v-touch>
+        <v-touch class="delete" @tap="handleTap('operate-delete')">
           <span class="iconfont">&#xe617;</span>
-        </div>
+        </v-touch>
       </div>
-    </div>
-  </div>
+    </v-touch>
+  </v-touch>
 </template>
 
 <script>
+import Transform from 'css3transform'
+
 export default {
   name: 'card',
   props: ['item'],
   methods: {
     handleTap(type) {
+      let exceptType = ['operate-move', 'operate-delete']
+      if(this.isSwiped && !exceptType.includes(type)) { // 处理当当前处于往左滑的时候，点击回弹效果
+        this.isMiddle = true
+        this.isSwiped = false
+        return
+      }
       switch (type) {
         case 'choose':
           this.choosed = !this.choosed
@@ -42,10 +54,33 @@ export default {
             path: `/app/edit/${this.item.id}`
           })
           break;
+        case 'operate-move':
+
+          break
+        case 'operate-delete':
+          this.$store.commit('App/deleteItem', { id: this.item.id })
+          this.$store.commit('App/updateStatus', { isManage: false , isAllChoose: false })
+          this.isMiddle = true
+          this.isSwiped = false
+          break
         default:
           break;
       }
-    }
+    },
+    handleSwipe(type) {
+      switch (type) {
+        case 'left':
+          this.isSwiped = true
+          this.isMiddle = false
+          break;
+        case 'right':
+          this.isMiddle = true
+          this.isSwiped = false
+          break;
+        default:
+          break;
+      }
+    },
   },
   computed: {
     status() {
@@ -56,14 +91,20 @@ export default {
       }
     }
   },
+
   data() {
     return {
-      choosed: false
+      choosed: false,
+      isSwiped: false,
+      isMiddle: false
     }
   },
   updated() {
     if(!this.status.isManage) {
       this.choosed = false
+    } else if(this.status.isManage) { //当处于管理列表状态的时候不可滑动
+      this.isSwiped = false
+      this.isMiddle = false
     }
   },
 }
@@ -71,15 +112,21 @@ export default {
 
 <style scope>
 #card {
-  width: 7.5rem;
+  width: 7.3rem;
   height: 60px;
   margin-top: .24rem;
   overflow: hidden;
 }
 
 .wrap {
+  width: 9.9rem;
   display: flex;
   height: 60px;
+  transform: translate3d(-0.8rem, 0, 0);
+}
+
+.active_middle {
+  transition: transform .2s;
   transform: translate3d(-0.8rem, 0, 0);
 }
 
@@ -88,6 +135,7 @@ export default {
 }
 
 .active_right {
+  transition: transform .2s;
   transform: translate3d(-2.4rem, 0, 0);
 }
 
@@ -121,7 +169,7 @@ export default {
 }
 
 .info {
-  width: 100%;
+  width: 7.3rem;
   flex-shrink: 0;
   height: 100%;
   box-sizing: border-box;

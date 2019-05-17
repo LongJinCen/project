@@ -10,6 +10,7 @@
   "dependencies": {
     "better-scroll": "^1.15.2",
     "core-js": "^2.6.5",
+    "css3transform": "^1.2.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue-touch": "^2.0.0-beta.4",

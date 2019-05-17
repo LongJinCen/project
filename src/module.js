@@ -9,7 +9,7 @@ export const App = {
         isAllChoose: false,
         curentId: 0,
         textAreaRef: null,
-        footerRef: null,
+        listRef: null,
         list: [
             // {
             //     id: 1,

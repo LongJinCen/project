@@ -88,7 +88,7 @@ export default {
 }
 
 .content {
-  width: 7.5rem;
+  width: 7.3rem;
   overflow:hidden;
 }
 
