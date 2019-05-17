@@ -5,6 +5,7 @@
  cd project
  npm install
  npm run serve
+ // 注意 url 需要加上 path 部分, `http://localhost:8080/#/app/home`
 ```
 ## info
 ## 参照
