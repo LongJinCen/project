@@ -94,6 +94,7 @@ export default {
   overflow: hidden;
   background-color: rgb(240, 238, 229);
   height: calc(100vh - 1rem);
+  position: relative;
 }
 
 .content {
@@ -102,7 +103,12 @@ export default {
 }
 
 .content span:first-child {
-  
+  font-size: 20px;
+  color: rgb(213, 213, 213);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }
 
 .edit {
