@@ -1,27 +1,27 @@
 <template>
   <v-touch id="card">
-    <v-touch class="wrap"
-      v-bind:class="{active_left: status.isManage, active_right: isSwiped, active_middle: isMiddle}"
+    <v-touch class="card-wrap"
+      v-bind:class="{card_active_left: status.isManage, card_active_right: isSwiped, card_active_middle: isMiddle}"
       @swipeleft="handleSwipe('left')"
       @swiperight="handleSwipe('right')"
     >
-      <div class="choose">
-        <v-touch class="choosed" @tap="handleTap('choose')">
+      <div class="card-choose">
+        <v-touch class="card-choosed" @tap="handleTap('choose')">
         </v-touch>
         <span class="iconfont" v-if="choosed && status.isAllChoose">&#xebe6;</span>
       </div>
-      <v-touch class="info" @tap="handleTap('detail')">
-        <p class="title one-line-text">{{ item.title }}</p>
-        <p class="other one-line-text">
+      <v-touch class="card-info" @tap="handleTap('detail')">
+        <p class="card-title one-line-text">{{ item.title }}</p>
+        <p class="card-other one-line-text">
           <span>{{ item.type }}</span>
           <span>{{ item.date }}</span>
         </p>
       </v-touch>
-      <div class="operate">
-        <v-touch class="move" @tap="handleTap('operate-move')">
+      <div class="card-operate">
+        <v-touch class="card-move" @tap="handleTap('operate-move')">
           <span class="iconfont">&#xe7d1;</span>
         </v-touch>
-        <v-touch class="delete" @tap="handleTap('operate-delete')">
+        <v-touch class="card-delete" @tap="handleTap('operate-delete')">
           <span class="iconfont">&#xe617;</span>
         </v-touch>
       </div>
@@ -118,28 +118,28 @@ export default {
   overflow: hidden;
 }
 
-.wrap {
+.card-wrap {
   width: 9.9rem;
   display: flex;
   height: 60px;
   transform: translate3d(-0.8rem, 0, 0);
 }
 
-.active_middle {
+.card_active_middle {
   transition: transform .2s;
   transform: translate3d(-0.8rem, 0, 0);
 }
 
-.active_left {
+.card_active_left {
   transform: translate3d(0, 0, 0);
 }
 
-.active_right {
+.card_active_right {
   transition: transform .2s;
   transform: translate3d(-2.4rem, 0, 0);
 }
 
-.choose {
+.card-choose {
   width: .8rem;
   flex-shrink: 0;
   height: 60px;
@@ -147,7 +147,7 @@ export default {
   position: relative;
 }
 
-.choose span {
+.card-choose span {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -155,7 +155,7 @@ export default {
   z-index: 0;
 }
 
-.choose .choosed {
+.card-choose .card-choosed {
   z-index: 10;
   position: absolute;
   left: 50%;
@@ -168,7 +168,7 @@ export default {
   border-radius: 50%;
 }
 
-.info {
+.card-info {
   width: 7.3rem;
   flex-shrink: 0;
   height: 100%;
@@ -181,38 +181,38 @@ export default {
   padding: 0 .2rem;
 }
 
-.info p:first-child {
+.card-info p:first-child {
   font-size: 16px;
 }
 
-.info p:last-child span:first-child {
+.card-info p:last-child span:first-child {
   color: rgb(67, 67, 67);
 }
 
-.info p:last-child span:last-child {
+.card-info p:last-child span:last-child {
   color: rgb(197, 197, 197);
   margin-left: .1rem;
 }
 
-.operate {
+.card-operate {
   width: 1.6rem;
   flex-shrink: 0;
   height: 100%;
   display: flex;
 }
 
-.operate div {
+.card-operate div {
   height: 100%;
   width: 50%;
   line-height: 60px;
   text-align: center;
 }
 
-.operate .move {
+.card-operate .card-move {
   background-color: rgb(247, 185, 73);
 }
 
-.operate .delete {
+.card-operate .card-delete {
   background-color: rgb(231, 88, 93);
 }
 </style>

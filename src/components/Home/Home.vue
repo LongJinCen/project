@@ -1,39 +1,43 @@
 <template>
   <div>
     <div id="home" ref="wrapper">
-      <ul class="content" v-if="items.length > 0">
+      <ul class="home-content" v-if="items.length > 0">
         <Card v-for="(item, index) in items" v-bind:key="index" v-bind:item="item"/>
       </ul>
-      <ul class="content" v-else>
+      <ul class="home-content" v-else>
         <span>暂无记录</span>
       </ul>
     </div>
 
     <router-link to="/app/edit/null" v-if="!status.isManage">
-      <v-touch class="edit">
+      <v-touch class="home-edit">
         <span class="iconfont">&#xe600;</span>
       </v-touch>
     </router-link>
 
-    <div class="footer" v-if="status.isManage">
-      <v-touch class="type" @tap="handleTap('type')">
+    <div class="home-footer" v-if="status.isManage">
+      <v-touch class="home-type" @tap="handleTap('type')">
         <span class="iconfont">&#xe7d1;</span>
       </v-touch>
-      <v-touch class="delete" @tap="handleTap('delete')">
+      <v-touch class="home-delete" @tap="handleTap('delete')">
         <span class="iconfont">&#xe617;</span>
       </v-touch>
     </div>
+
+    <Modal />
   </div>
 </template>
 
 <script>
 import Card from './Component/Card.vue'
 import BScroll from 'better-scroll'
+import Modal from '../Common/Modal/index.vue'
 
 export default {
   name: 'home',
   components: {
-    Card
+    Card,
+    Modal
   },
   mounted() {
     this.$nextTick(() => {
@@ -97,12 +101,12 @@ export default {
   position: relative;
 }
 
-.content {
+.home-content {
   width: 7.3rem;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.content span:first-child {
+.home-content > span:first-child {
   font-size: 20px;
   color: rgb(213, 213, 213);
   position: absolute;
@@ -111,19 +115,20 @@ export default {
   transform: translate3d(-50%, -50%, 0);
 }
 
-.edit {
+.home-edit {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
   background-color: rgb(247, 185, 73);
   position: fixed;
+  z-index: 1;
   right: .4rem;
   bottom: .4rem;
   overflow: hidden;
   box-shadow: 0 10px 10px -2px rgb(233, 200, 134);
 }
 
-.edit span {
+.home-edit span {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -131,29 +136,30 @@ export default {
   font-size: .4rem;
 }
 
-.footer {
+.home-footer {
   position: fixed;
+  z-index: 10;
   bottom: 0;
   width: 7.5rem;
   height: .9rem;
   display: flex;
 }
 
-.footer div {
+.home-footer div {
   flex-shrink: 1;
   flex-grow: 1;
   line-height: .9rem;
   text-align: center;
 }
-.footer div:first-child {
+.home-footer div:first-child {
   background-color: rgb(247, 185, 73);
 }
 
-.footer div:last-child {
+.home-footer div:last-child {
   background-color: rgb(231, 88, 93);
 }
 
-.footer div span {
+.home-footer div span {
   font-size: .4rem;
 }
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="header">
-    <div class="top-left float-left">
+  <div id="header">
+    <div class="header-top-left float-left">
       <v-touch
           class="iconfont v-touch-inline"
           @tap="handleTap('back')"
@@ -8,7 +8,7 @@
         >&#xe609;</v-touch>
       <span class="iconfont" v-else>&#xeb61;</span>
     </div>
-    <div class="top-right float-right">
+    <div class="header-top-right float-right">
       <template v-if="!status.atEdit&&!status.isManage">
         <v-touch
           class="iconfont v-touch-inline"
@@ -20,17 +20,17 @@
         >&#xe627;</v-touch>
       </template>
       <v-touch
-        class="statusText"
+        class="header-statusText"
         v-if="status.isFocus"
         @tap="handleTap('complete')"
       >完成</v-touch>
       <v-touch
-        class="statusText"
+        class="header-statusText"
         v-else-if="status.isManage"
         @tap="handleTap('cancle')"
       >取消</v-touch>
     </div>
-    <div class="top-center ">
+    <div class="header-top-center ">
       <span>全部</span>
       <span class="iconfont">&#xe8ec;</span>
     </div>
@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style scope>
-.header {
+#header {
   width: 7.5rem;
   height: 1rem;
   background-color: rgb(240, 238, 229);
@@ -130,20 +130,20 @@ export default {
   border-bottom: 0.02rem solid rgb(227, 223, 215)
 }
 
-.top-left span {
+.header-top-left span {
   font-size: 0.6rem;
 }
 
-.top-left .v-touch-inline {
+.header-top-left .v-touch-inline {
   font-size: .6rem;
 }
 
-.top-right .v-touch-inline {
+.header-top-right .v-touch-inline {
   font-size: 0.6rem;
   line-height: .6rem;
 }
 
-.top-center {
+.header-top-center {
   margin-left: .6rem;
   margin-right: 1.2rem;
   text-align: center;
@@ -152,17 +152,17 @@ export default {
   font-size: .4rem;
 }
 
-.top-center span:nth-child(1) {
+.header-top-center span:nth-child(1) {
   margin-left: .2rem;
   vertical-align: middle;
 }
 
-.top-center span:nth-child(2) {
+.header-top-center span:nth-child(2) {
   font-size: .24rem;
   margin-left: 5px;
 }
 
-.header .statusText {
+#header .header-statusText {
   font-size: 15px;
   display: inline-block;
   line-height: .6rem;
