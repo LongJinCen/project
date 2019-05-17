@@ -14,7 +14,7 @@
 
 ### 插件
 
-由于编写插件需要消耗大量时间，自己也是头一次写移动端项目，虽然对布局还是比较了解，但是事件方面自己写还是很有难度，这里直接采用了别人写好的插件
+由于编写插件需要消耗大量时间，自己也是头一次写移动端项目，虽然对布局和相关概念还是比较了解，但是事件方面自己写还是很有难度，这里直接采用了别人写好的插件
 - [Vue-touch](https://github.com/vuejs/vue-touch/tree/next]): 提供了触摸相关的事件的一个组件
 - [better-scroll](https://github.com/ustbhuangyi/better-scroll): 列表滚动使用到这个插件
 - [transformjs](https://github.com/AlloyTeam/AlloyTouch/tree/master/transformjs): Alloyteam封装的一个插件，可以用来配合 js 实现动画
