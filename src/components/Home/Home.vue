@@ -16,15 +16,15 @@
     </router-link>
 
     <div class="home-footer" v-if="status.isManage">
-      <v-touch class="home-type" @tap="handleTap('type')">
+      <v-touch class="home-type" @tap="(e) => handleTap('type',e)">
         <span class="iconfont">&#xe7d1;</span>
       </v-touch>
-      <v-touch class="home-delete" @tap="handleTap('delete')">
+      <v-touch class="home-delete" @tap="(e) => handleTap('delete',e)">
         <span class="iconfont">&#xe617;</span>
       </v-touch>
     </div>
 
-    <Modal />
+    <!-- <Modal /> -->
   </div>
 </template>
 
@@ -73,7 +73,8 @@ export default {
     }
   },
   methods: {
-    handleTap(type) {
+    handleTap(type,e) {
+      e.preventDefault();
       switch (type) {
         case 'type':
           break;

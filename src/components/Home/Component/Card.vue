@@ -161,8 +161,8 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
-  width: .3rem;
-  height: .3rem;
+  width: .4rem;
+  height: .4rem;
   border: 0.02rem solid rgb(194, 184, 175);
   display: inline-block;
   border-radius: 50%;
