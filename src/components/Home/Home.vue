@@ -1,15 +1,20 @@
 <template>
   <div>
     <div id="home" ref="wrapper">
-      <ul class="content">
+      <ul class="content" v-if="items.length > 0">
         <Card v-for="(item, index) in items" v-bind:key="index" v-bind:item="item"/>
       </ul>
+      <ul class="content" v-else>
+        <span>暂无记录</span>
+      </ul>
     </div>
+
     <router-link to="/app/edit/null" v-if="!status.isManage">
       <v-touch class="edit">
         <span class="iconfont">&#xe600;</span>
       </v-touch>
     </router-link>
+
     <div class="footer" v-if="status.isManage">
       <v-touch class="type" @tap="handleTap('type')">
         <span class="iconfont">&#xe7d1;</span>
@@ -58,6 +63,9 @@ export default {
       return {
         isManage: app.isManage
       }
+    },
+    listRef() {
+      return this.$store.state.App.listRef
     }
   },
   methods: {
@@ -68,6 +76,7 @@ export default {
         case 'delete':
           this.$store.commit('App/deleteItem', {})
           this.$store.commit('App/updateStatus', { isManage: false , isAllChoose: false })
+          this.listRef.style.height = 'calc(100vh - 1rem)'
           break;
         default:
           break;
@@ -90,6 +99,10 @@ export default {
 .content {
   width: 7.3rem;
   overflow:hidden;
+}
+
+.content span:first-child {
+  
 }
 
 .edit {

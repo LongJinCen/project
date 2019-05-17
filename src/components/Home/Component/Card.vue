@@ -59,7 +59,7 @@ export default {
           break
         case 'operate-delete':
           this.$store.commit('App/deleteItem', { id: this.item.id })
-          this.$store.commit('App/updateStatus', { isManage: false , isAllChoose: false })
+          this.$store.commit('App/updateStatus', { isManage: false, isAllChoose: false })
           this.isMiddle = true
           this.isSwiped = false
           break
