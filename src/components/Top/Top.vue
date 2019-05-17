@@ -9,7 +9,7 @@
       <span class="iconfont" v-else>&#xeb61;</span>
     </div>
     <div class="top-right float-right">
-      <template v-if="!status.atEdit">
+      <template v-if="!status.atEdit&&!status.isManage">
         <v-touch
           class="iconfont v-touch-inline"
           @tap="handleTap('search')"
@@ -66,13 +66,13 @@ export default {
               this.handleComplete()
             break;
           case 'cancle':
-
+            this.$store.commit('App/updateStatus', { isManage: false , isAllChoose: false})
             break;
           case 'search':
             
             break;
           case 'manage':
-
+            this.$store.commit('App/updateStatus', { isManage: true }) //  全选
             break;
           case 'back':
             this.$router.push('/app/home')

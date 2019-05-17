@@ -6,17 +6,41 @@ export const App = {
         isFocus: false,
         atEdit: false,
         isUpdate: false,
+        isAllChoose: false,
         textAreaRef: null,
         curentId: 0,
-        list: []
+        list: [{
+            id: 1,
+            title: '记事本',
+            content: '记事本用来记录',
+            date: '2015/08/12',
+            type: '备忘录'
+        }],
+        choosed: {}
     },
     mutations: {
         createItem(state, payload) {
             state.list.unshift(payload.newItem)
             localStorage.setItem('noteLists', JSON.stringify(state.list))
         },
-        deleteItem(state) {
-
+        deleteItem(state, payload) {
+            const choosed = state.choosed
+            if(payload.id) {
+                state.list = state.list.filter(item => item.id !== payload.id)
+                state.choosed = {}
+                return
+            }
+            const props = Object.keys(choosed).filter(value => choosed[value] === true)
+            // const props = Object.keys(state.choosed)
+            console.log(props, 'props')
+            if(props.length === 0) {
+                console.log('没有可以删除的项')
+                return
+            }
+            state.list = state.list.filter(item => {
+                return !props.includes(item.id)
+            })
+            state.choosed = {}
         },
         updateItem(state, payload) {
             const id = payload.updateItem.id,
@@ -42,6 +66,20 @@ export const App = {
         readFromLocalStorage(state, payload) {
             state.list = payload.list
         },
+        updateChoosed(state, payload) {
+            if(state.choosed[payload.id]) {
+                state.choosed = {
+                    ...state.choosed,
+                    [payload.id]: false
+                }
+                // delete state.choosed[payload.id]
+            } else {
+                state.choosed = {
+                    ...state.choosed,
+                    [payload.id]: true
+                }
+            }
+        }
     },
     getters: {
         getById :(state) => (id) => {

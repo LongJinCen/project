@@ -1,18 +1,18 @@
 <template>
-  <v-touch id="card"  @tap="handleRoute">
-    <div class="wrap">
+  <div id="card">
+    <div class="wrap" v-bind:class="{active_left: status.isManage}">
       <div class="choose">
-        <span class="choosed">
-        </span>
-        <span class="iconfont">&#xebe6;</span>
+        <v-touch class="choosed" @tap="handleTap('choose')">
+        </v-touch>
+        <span class="iconfont" v-if="choosed && status.isAllChoose">&#xebe6;</span>
       </div>
-      <div class="info">
+      <v-touch class="info" @tap="handleTap('detail')">
         <p class="title one-line-text">{{ item.title }}</p>
         <p class="other one-line-text">
           <span>{{ item.type }}</span>
           <span>{{ item.date }}</span>
         </p>
-      </div>
+      </v-touch>
       <div class="operate">
         <div class="move">
           <span class="iconfont">&#xe7d1;</span>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-  </v-touch>
+  </div>
 </template>
 
 <script>
@@ -30,10 +30,41 @@ export default {
   name: 'card',
   props: ['item'],
   methods: {
-    handleRoute() {
-      this.$router.push({
-        path: `/app/edit/${this.item.id}`
-      })
+    handleTap(type) {
+      switch (type) {
+        case 'choose':
+          this.choosed = !this.choosed
+          this.$store.commit('App/updateStatus', {isAllChoose: true})
+          this.$store.commit('App/updateChoosed', { id: this.item.id })
+          break;
+        case 'detail':
+          this.$router.push({
+            path: `/app/edit/${this.item.id}`
+          })
+          break;
+        default:
+          break;
+      }
+    }
+  },
+  computed: {
+    status() {
+      const app = this.$store.state.App
+      return {
+        isManage: app.isManage,
+        isAllChoose: app.isAllChoose
+      }
+    }
+  },
+  data() {
+    return {
+      choosed: false
+    }
+  },
+  updated() {
+    console.log(this.choosed ,this.status.isAllChoose)
+    if(!this.status.isManage) {
+      this.choosed = false
     }
   },
 }
@@ -53,11 +84,11 @@ export default {
   transform: translate3d(-0.8rem, 0, 0);
 }
 
-.active-left {
+.active_left {
   transform: translate3d(0, 0, 0);
 }
 
-.active-right {
+.active_right {
   transform: translate3d(-2.4rem, 0, 0);
 }
 
@@ -74,9 +105,15 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
+  z-index: 0;
 }
 
 .choose .choosed {
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
   width: .3rem;
   height: .3rem;
   border: 0.02rem solid rgb(194, 184, 175);

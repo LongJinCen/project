@@ -5,13 +5,18 @@
         <Card v-for="(item, index) in items" v-bind:key="index" v-bind:item="item"/>
       </ul>
     </div>
-    <router-link to="/app/edit/null">
+    <router-link to="/app/edit/null" v-if="!status.isManage">
       <v-touch class="edit">
         <span class="iconfont">&#xe600;</span>
       </v-touch>
     </router-link>
-    <div class="footer">
-
+    <div class="footer" v-if="status.isManage">
+      <v-touch class="type" @tap="handleTap('type')">
+        <span class="iconfont">&#xe7d1;</span>
+      </v-touch>
+      <v-touch class="delete" @tap="handleTap('delete')">
+        <span class="iconfont">&#xe617;</span>
+      </v-touch>
     </div>
   </div>
 </template>
@@ -43,6 +48,26 @@ export default {
   computed: {
     items () {
       return this.$store.state.App.list
+    },
+    status() {
+      const app = this.$store.state.App
+      return {
+        isManage: app.isManage
+      }
+    }
+  },
+  methods: {
+    handleTap(type) {
+      switch (type) {
+        case 'type':
+          break;
+        case 'delete':
+          this.$store.commit('App/deleteItem', {})
+          this.$store.commit('App/updateStatus', { isManage: false , isAllChoose: false })
+          break;
+        default:
+          break;
+      }
     }
   },
 }
@@ -84,7 +109,29 @@ export default {
 }
 
 .footer {
+  position: fixed;
+  bottom: 0;
+  width: 7.5rem;
+  height: .9rem;
+  display: flex;
+}
 
+.footer div {
+  flex-shrink: 1;
+  flex-grow: 1;
+  line-height: .9rem;
+  text-align: center;
+}
+.footer div:first-child {
+  background-color: rgb(247, 185, 73);
+}
+
+.footer div:last-child {
+  background-color: rgb(231, 88, 93);
+}
+
+.footer div span {
+  font-size: .4rem;
 }
 
 </style>
