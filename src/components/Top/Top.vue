@@ -55,6 +55,9 @@ export default {
       textAreaRef () {
         return this.$store.state.App.textAreaRef
       },
+      listRef() {
+        return this.$store.state.App.listRef
+      },
       editId () {
         return this.$store.state.App.curentId;
       }
@@ -67,6 +70,7 @@ export default {
             break;
           case 'cancle':
             this.$store.commit('App/updateStatus', { isManage: false , isAllChoose: false})
+            this.listRef.style.height = 'calc(100vh - 1rem)'
             break;
           case 'search':
             

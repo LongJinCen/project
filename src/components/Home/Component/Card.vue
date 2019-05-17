@@ -62,7 +62,6 @@ export default {
     }
   },
   updated() {
-    console.log(this.choosed ,this.status.isAllChoose)
     if(!this.status.isManage) {
       this.choosed = false
     }

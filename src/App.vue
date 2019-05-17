@@ -19,6 +19,7 @@ export default {
   },
   mounted() {
     let list = localStorage.getItem('noteLists')
+    // let list = localStorage.removeItem('noteLists')
     if(list) {
       this.$store.commit('App/readFromLocalStorage', {
         list: JSON.parse(list),

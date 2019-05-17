@@ -7,15 +7,18 @@ export const App = {
         atEdit: false,
         isUpdate: false,
         isAllChoose: false,
-        textAreaRef: null,
         curentId: 0,
-        list: [{
-            id: 1,
-            title: '记事本',
-            content: '记事本用来记录',
-            date: '2015/08/12',
-            type: '备忘录'
-        }],
+        textAreaRef: null,
+        footerRef: null,
+        list: [
+            // {
+            //     id: 1,
+            //     title: '记事本',
+            //     content: '记事本用来记录',
+            //     date: '2015/08/12',
+            //     type: '备忘录'
+            // }
+        ],
         choosed: {}
     },
     mutations: {
@@ -28,11 +31,11 @@ export const App = {
             if(payload.id) {
                 state.list = state.list.filter(item => item.id !== payload.id)
                 state.choosed = {}
+                localStorage.setItem('noteLists', JSON.stringify(state.list))
                 return
             }
             const props = Object.keys(choosed).filter(value => choosed[value] === true)
             // const props = Object.keys(state.choosed)
-            console.log(props, 'props')
             if(props.length === 0) {
                 console.log('没有可以删除的项')
                 return
@@ -41,6 +44,7 @@ export const App = {
                 return !props.includes(item.id)
             })
             state.choosed = {}
+            localStorage.setItem('noteLists', JSON.stringify(state.list))
         },
         updateItem(state, payload) {
             const id = payload.updateItem.id,

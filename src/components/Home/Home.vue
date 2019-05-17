@@ -33,11 +33,15 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.scroll = new BScroll(this.$refs.wrapper, {})
+      this.$store.commit('App/updateStatus', { listRef: this.$refs.wrapper })
     })
   },
   updated: function () {
     this.$nextTick(() => {
       this.scroll.refresh()
+      if(this.status.isManage) {
+        this.$refs.wrapper.style.height = `calc(100vh - 1.9rem)`
+      }
     })
   },
   data() {
