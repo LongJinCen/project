@@ -3,6 +3,11 @@
 ## Build Setup
 
 ``` bash
+
+git clone -b mt-app https://github.com/LongJinCen/project.git
+
+cd mt-app
+
 # install dependencies
 $ npm install
 
